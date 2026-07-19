@@ -7,7 +7,7 @@ services:
       - ./CoursePlatform/.env
 
   web:
-    build: ./CoursePlatform
+    image:  rakeshkarki/web:latest
     ports: 
       - "8080:8000"
     env_file:

@@ -28,7 +28,7 @@ jobs:
          - name : Build app 
            run  : |
               docker build \
-              -t $DOCKER_USERNAME/web:${{ github.sha }}
+              -t $DOCKER_USERNAME/web:${{ github.sha }} \
               -t $DOCKER_USERNAME/web:latest \
               ./CoursePlatform
 
