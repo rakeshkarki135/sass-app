@@ -24,10 +24,14 @@ jobs:
             run  : pip install -r ./CoursePlatform/requirements.txt
 
           - name : Run Check 
-            run  : python manage.py check 
+            run  :  |
+                cd CoursePlatform
+                python manage.py check 
 
           - name : Run test
-            run  : python manage.py test 
+            run  :  |
+                cd CoursePlatform
+                python manage.py test 
 
     build:
       needs: test
