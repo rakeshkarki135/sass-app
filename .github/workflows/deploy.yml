@@ -30,7 +30,7 @@ jobs:
               docker build \
               -t $DOCKER_USERNAME/web:${{ github.sha }}
               -t $DOCKER_USERNAME/web:latest \
-              ./CoursePltform
+              ./CoursePlatform
 
          - name : Push app
            run  : |
