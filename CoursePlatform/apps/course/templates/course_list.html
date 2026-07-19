@@ -1,0 +1,51 @@
+ {% extends "base.html" %}
+
+ {% block content %}
+
+ <h2 class="text-center text-xl my-10">Courses</h2>
+
+
+
+{% if messages %}
+<div class="">
+  {% for message in messages %}
+  <p id="messages" class="text-center text-sm font-light {% if message.tags == 'error' %}text-red-500 
+  {% else %}text-green-500 {% endif %}">{{ message }}</p>
+  {% endfor %}
+</div>
+{% endif %}
+
+
+<div class="w-full flex items-center justify-center flex-col gap-8">
+ {% for course in courses %}
+   <div class="w-2/3 bg-gray-400 flex items-center justify-between p-4 rounded-xl">
+    <div>{{course.title}} - Rs.{{course.price }}</div>
+    <div class="">
+        {% if course.is_unlocked %}
+          <a href="{% url 'course_detail' course.id %}" class="bg-green-400 p-3 hover:bg-green-500 rounded-xl border-white border-2">View Course</a>
+        {% else %}
+            <form method="POST" action="{% url 'initiate_khalti' %}" class="relative">
+              {% csrf_token %}
+              <input type="hidden" name="amount" value="1000" id="">
+              <input type="hidden" name="return_url" value="http://127.0.0.1:8000/payment/verify/{{course.id}}">
+              <a class="bg-red-400 p-3 hover:bg-red-500 rounded-xl border-white border-2"><button type="submit">Buy Courses</button></a>      
+          </form>
+        {% endif %}
+
+    </div>
+   </div>
+ {% endfor %}
+</div>
+
+<script>
+  const message = document.getElementById("messages");
+
+  if (message){
+    setTimeout(() => {
+      message.remove();
+    }, 3000);
+  }
+
+</script>
+
+{% endblock %}

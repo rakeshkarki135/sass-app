@@ -1,0 +1,30 @@
+
+input
+{
+    width: 100%;
+    padding: 6px;
+    outline: solid black;
+    outline-width: 2px;
+    border-radius: 4px;
+   
+}
+
+
+
+input:focus{
+    outline: solid blueviolet;
+    outline-width: 2px;
+    border-radius: 4px;
+}
+
+button {
+    width: 50px;
+    padding: 5px;
+    color: whitesmoke;
+    background-color: red;
+}
+
+button:hover{
+    background-color: brown;
+
+}

@@ -1,0 +1,49 @@
+{% load static %}
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course SAAS</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+    {% tailwind_css %}
+</head>
+<body>
+    <header class="text-gray-400 body-font">
+    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <a class="flex text-2xl font-bold items-center text-gray-900 mb-4 md:mb-0">
+        CoursePlatform
+        </a>
+        <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
+            <a href="#" class="mr-5 hover:text-red-800 font-bold text-sm">HOME</a>
+            <a href="{% url 'course_list' %}" class="mr-5 hover:text-red-800 font-bold text-sm">COURSES</a>
+            <a href="#" class="mr-5 hover:text-red-800 font-bold text-sm">ABOUT</a>
+            <a href="#" class="mr-5 hover:text-red-800 font-bold text-sm">CONTACT</a>
+        </nav>
+        <div class="">
+            {% if user.is_authenticated %}
+                <div class="flex gap-2">
+                    <form method="POST" action="{% url 'logout' %}">
+                        {%   csrf_token   %}
+                        <button type="submit" class="mr-5 hover:text-red-800">Logout</button>
+                    </form>
+                </div>
+            {% else %}
+                <div class="flex gap-2">
+                    <a href="{% url 'login' %}" class="mr-5 hover:text-red-800">Login</a>
+                    <a href="{% url 'register' %}" class="mr-5 hover:text-red-800">Register</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    </header>
+
+    <main>
+    {% block content %}
+
+    {% endblock %}
+    </main>
+</body>
+</html>

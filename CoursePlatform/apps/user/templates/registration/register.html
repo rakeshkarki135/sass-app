@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="w-full flex items-center justify-center flex-col gap-4 mt-20">
+    <form class="w-1/2 flex flex-col gap-6 bg-gray-400 p-8 text-black rounded-xl my-8" method="post"> 
+        {% csrf_token %}
+        <h1 class="text-center text-white font-bold text-2xl">Register Form</h1>
+
+        {{ form.as_p}}
+        {% comment %} <input type="text" name="email" class="p-3 text-sm outline-white border-white border" placeholder="Enter Email Address">
+        <input type="password" name="password" class="p-3 text-sm  outline-white border-white border"  placeholder="********" > {% endcomment %}
+        <button type="submit" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-sm rounded-xl text-white">Register</button>
+    </form>
+    <div class="text-center">Already have an account ? <a href="{% url 'register' %}">Login Here</a></div>
+</div>
+
+{% endblock %}
