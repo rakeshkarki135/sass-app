@@ -8,8 +8,30 @@ on:
       - main
 
 jobs:
+    test:
+       runs-on: ubantu-latest
+       
+       steps:
+          - name : Checkout Repository
+            uses : actions/checkout@v4
+
+          - name : Setup Python
+            uses : actions/setup-python@v5
+            with : 
+               python-version: "3.13"
+
+          - name : Install requirements
+            run  : pip install -r requirements.txt
+
+          - name : Run Check 
+            run  : python manage.py check 
+
+          - name : Run test
+            run  : python manage.py test 
+
     build:
-      runs-on: self-hosted
+      needs: test
+      runs-on: ubantu-latest
       
       env:
         DOCKER_USERNAME : ${{ vars.DOCKER_USERNAME }}
@@ -38,14 +60,19 @@ jobs:
               docker push $DOCKER_USERNAME/web:latest 
 
 
+    deploy:
+      needs: build
 
-         - name : Deploy
-           run  : |
-               cd /home/rakesh/Desktop/practices/django/sass-app/
+      runs-on: self-hosted
 
-               docker compose down --remove-orphans || true 
-               docker compose pull 
-               docker compose up -d
+      steps:
+      - name : Deploy
+        run  : |
+            cd /home/rakesh/Desktop/practices/django/sass-app/
+
+            docker compose down --remove-orphans || true 
+            docker compose pull 
+            docker compose up -d
 
          
         
