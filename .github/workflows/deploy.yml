@@ -21,7 +21,7 @@ jobs:
                python-version: "3.13"
 
           - name : Install requirements
-            run  : pip install -r requirements.txt
+            run  : pip install -r ./CoursePlatform/requirements.txt
 
           - name : Run Check 
             run  : python manage.py check 
